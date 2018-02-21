@@ -54,8 +54,7 @@
             android:numStars="5"
             android:stepSize="0.1"
             app:mrb_fillBackgroundStars="true"
-            app:mrb_progressBackgroundTint="#78909C"
-            app:mrb_secondaryProgressTint="#CFD8DC" />
+            app:mrb_progressBackgroundTint="#78909C" />
 
     </LinearLayout>
 

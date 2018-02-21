@@ -8,6 +8,7 @@ import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import inc.ahmedmourad.popularmovies.R;
 import inc.ahmedmourad.popularmovies.model.api.ApiClient;
 import inc.ahmedmourad.popularmovies.model.api.ApiInterface;
 import inc.ahmedmourad.popularmovies.model.database.MovieContract;
@@ -22,8 +23,9 @@ public final class NetworkUtils {
 
     /**
      * Fetch complete data for a single movie
+     *
      * @param context The secret key
-     * @param id id
+     * @param id      id
      */
     public static void fetchSingleMovieData(final Context context, final long id) {
 
@@ -45,15 +47,12 @@ public final class NetworkUtils {
                         if (throwable instanceof ConnectException || throwable instanceof UnknownHostException)
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\nCheck your network connection.",
+                                    R.string.network_error,
                                     Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\n" +
-                                            throwable.getLocalizedMessage() +
-                                            "\n" +
-                                            throwable.getCause().getLocalizedMessage(),
+                                    context.getString(R.string.network_error_cause, throwable.getLocalizedMessage(), throwable.getCause().getLocalizedMessage()),
                                     Toast.LENGTH_LONG).show();
                     });
 
@@ -63,8 +62,9 @@ public final class NetworkUtils {
 
     /**
      * Fetch the 20 popular movies of the first page
+     *
      * @param context Batman's Belt
-     * @param client client
+     * @param client  client
      */
     public static void fetchPopularMoviesData(final Context context, ApiInterface client) {
 
@@ -103,15 +103,12 @@ public final class NetworkUtils {
                         if (throwable instanceof ConnectException || throwable instanceof UnknownHostException)
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\nCheck your network connection.",
+                                    R.string.network_error,
                                     Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\n" +
-                                            throwable.getLocalizedMessage() +
-                                            "\n" +
-                                            throwable.getCause().getLocalizedMessage(),
+                                    context.getString(R.string.network_error_cause, throwable.getLocalizedMessage(), throwable.getCause().getLocalizedMessage()),
                                     Toast.LENGTH_LONG).show();
                     });
 
@@ -121,8 +118,9 @@ public final class NetworkUtils {
 
     /**
      * Fetch the 20 top rated movies of the first page
+     *
      * @param context Your secret identity
-     * @param client client
+     * @param client  client
      */
     public static void fetchTopRatedMoviesData(final Context context, ApiInterface client) {
 
@@ -160,15 +158,12 @@ public final class NetworkUtils {
                         if (throwable instanceof ConnectException || throwable instanceof UnknownHostException)
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\nCheck your network connection.",
+                                    R.string.network_error,
                                     Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(
                                     context,
-                                    "Movie Sync Failed!\n" +
-                                            throwable.getLocalizedMessage() +
-                                            "\n" +
-                                            throwable.getCause().getLocalizedMessage(),
+                                    context.getString(R.string.network_error_cause, throwable.getLocalizedMessage(), throwable.getCause().getLocalizedMessage()),
                                     Toast.LENGTH_LONG).show();
                     });
 

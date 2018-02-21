@@ -34,6 +34,11 @@ import inc.ahmedmourad.popularmovies.utils.PreferencesUtils;
 
 public class MoviesController extends Controller implements RecyclerAdapter.OnClickListener {
 
+    public static final String KEY_MODE = "mode";
+
+    public static final int MODE_POPULAR = 0;
+    public static final int MODE_TOP_RATED = 1;
+
     public static final int COL_ID = 0;
     public static final int COL_ORIGINAL_TITLE = 1;
     public static final int COL_POSTER_PATH = 2;
@@ -41,9 +46,7 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
     public static final int COL_VOTES_AVERAGE = 4;
     public static final int COL_RELEASE_DATE = 5;
     public static final int COL_IS_ADULT = 6;
-    public static final String KEY_MODE = "mode";
-    public static final int MODE_POPULAR = 0;
-    public static final int MODE_TOP_RATED = 1;
+
     private static final String[] COLUMNS = new String[]{
             MovieContract.MoviesEntry.TABLE_NAME + "." + MovieContract.MoviesEntry.COLUMN_ID,
             MovieContract.MoviesEntry.COLUMN_ORIGINAL_TITLE,
@@ -142,6 +145,7 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
     /**
      * initialize our refreshLayout
+     *
      * @param context context
      */
     private void initializeRefreshLayout(final Context context) {
@@ -174,7 +178,8 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
     /**
      * initialize our recyclerView
-     * @param context context
+     *
+     * @param context         context
      * @param recyclerAdapter recyclerAdapter
      */
     private void initializeRecyclerView(final Context context, final RecyclerAdapter recyclerAdapter) {

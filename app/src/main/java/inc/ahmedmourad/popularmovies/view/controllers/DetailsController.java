@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.SubtitleCollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -43,7 +44,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 /**
  * This's where we display the details of our movie
  */
-public class DetailsController extends Controller {
+public class DetailsController extends Controller implements AppBarLayout.OnOffsetChangedListener {
 
     public static final int COL_ID = 0;
     public static final int COL_ORIGINAL_TITLE = 1;
@@ -70,30 +71,46 @@ public class DetailsController extends Controller {
             MovieContract.MoviesEntry.COLUMN_GENRES,
             MovieContract.MoviesEntry.COLUMN_TAGLINE
     };
+
     @BindView(R.id.details_overview)
     TextView overviewTextView;
+
     @BindView(R.id.details_runtime)
     TextView runtimeTextView;
+
     @BindView(R.id.details_rating)
     TextView ratingTextView;
+
     @BindView(R.id.details_rating_bar)
     MaterialRatingBar ratingBar;
+
     @BindView(R.id.details_poster)
     ImageView posterImageView;
+
     @BindView(R.id.details_backdrop)
     ImageView backdropImageView;
+
     @BindView(R.id.details_refresh_layout)
     SwipeRefreshLayout refreshLayout;
+
     @BindView(R.id.details_toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.details_collapsing_toolbar)
     SubtitleCollapsingToolbarLayout collapsingToolbar;
+
     @BindView(R.id.details_date)
     TextView dateTextView;
+
     @BindView(R.id.details_genres)
     FlexboxLayout flexboxLayout;
+
     @BindView(R.id.details_adult)
     FrameLayout adultFrameLayout;
+
+    @BindView(R.id.details_appbar)
+    AppBarLayout appBarLayout;
+
     private long id;
     private ContentObserver contentObserver;
 
@@ -146,11 +163,6 @@ public class DetailsController extends Controller {
         });
 
         return view;
-    }
-
-    @Override
-    protected void onDetach(@NonNull final View view) {
-        view.getContext().getContentResolver().unregisterContentObserver(contentObserver);
     }
 
     /**
@@ -246,7 +258,7 @@ public class DetailsController extends Controller {
                 else if (movie.runtime < 60)
                     runtime = context.getResources().getQuantityString(R.plurals.runtime_minutes, minutes, minutes);
                 else
-                    runtime = context.getResources().getQuantityString(R.plurals.runtime_hours, hours, hours) + ", " +
+                    runtime = context.getResources().getQuantityString(R.plurals.runtime_hours, hours, hours) + "  " +
                             context.getResources().getQuantityString(R.plurals.runtime_minutes, minutes, minutes);
 
                 runtimeTextView.setText(runtime);
@@ -301,5 +313,22 @@ public class DetailsController extends Controller {
         getRouter().popController(this);
 
         Toast.makeText(context, R.string.error_message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onOffsetChanged(final AppBarLayout appBarLayout, final int verticalOffset) {
+        refreshLayout.setEnabled(verticalOffset == 0);
+    }
+
+    @Override
+    protected void onAttach(@NonNull final View view) {
+        super.onAttach(view);
+        appBarLayout.addOnOffsetChangedListener(this);
+    }
+
+    @Override
+    protected void onDetach(@NonNull final View view) {
+        view.getContext().getContentResolver().unregisterContentObserver(contentObserver);
+        appBarLayout.removeOnOffsetChangedListener(this);
     }
 }

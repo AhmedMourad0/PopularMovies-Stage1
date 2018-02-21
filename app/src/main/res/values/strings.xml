@@ -23,4 +23,7 @@
     <string name="genres">Genres</string>
     <string name="adult">ADULT</string>
     <string name="error_message">Something went wrong while loading data.</string>
+    <string name="network_error">Movie Sync Failed!\nCheck your network connection.</string>
+
+    <string name="network_error_cause">Movie Sync Failed!\n%1$s\n%2$s</string>
 </resources>
