@@ -45,6 +45,18 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
  */
 public class DetailsController extends Controller {
 
+    public static final int COL_ID = 0;
+    public static final int COL_ORIGINAL_TITLE = 1;
+    public static final int COL_POSTER_PATH = 2;
+    public static final int COL_OVERVIEW = 3;
+    public static final int COL_VOTES_AVERAGE = 4;
+    public static final int COL_RELEASE_DATE = 5;
+    public static final int COL_IS_ADULT = 6;
+    public static final int COL_RUNTIME = 7;
+    public static final int COL_BACKDROP_PATH = 8;
+    public static final int COL_GENRES = 9;
+    public static final int COL_TAGLINE = 10;
+    static final String KEY_ID = "id";
     private static final String[] COLUMNS = new String[]{
             MovieContract.MoviesEntry.TABLE_NAME + "." + MovieContract.MoviesEntry.COLUMN_ID,
             MovieContract.MoviesEntry.COLUMN_ORIGINAL_TITLE,
@@ -58,60 +70,32 @@ public class DetailsController extends Controller {
             MovieContract.MoviesEntry.COLUMN_GENRES,
             MovieContract.MoviesEntry.COLUMN_TAGLINE
     };
-
-    public static final int COL_ID = 0;
-    public static final int COL_ORIGINAL_TITLE = 1;
-    public static final int COL_POSTER_PATH = 2;
-    public static final int COL_OVERVIEW = 3;
-    public static final int COL_VOTES_AVERAGE = 4;
-    public static final int COL_RELEASE_DATE = 5;
-    public static final int COL_IS_ADULT = 6;
-    public static final int COL_RUNTIME = 7;
-    public static final int COL_BACKDROP_PATH = 8;
-    public static final int COL_GENRES = 9;
-    public static final int COL_TAGLINE = 10;
-
-    static final String KEY_ID = "id";
-
-    private long id;
-
-    private ContentObserver contentObserver;
-
     @BindView(R.id.details_overview)
     TextView overviewTextView;
-
     @BindView(R.id.details_runtime)
     TextView runtimeTextView;
-
     @BindView(R.id.details_rating)
     TextView ratingTextView;
-
     @BindView(R.id.details_rating_bar)
     MaterialRatingBar ratingBar;
-
     @BindView(R.id.details_poster)
     ImageView posterImageView;
-
     @BindView(R.id.details_backdrop)
     ImageView backdropImageView;
-
     @BindView(R.id.details_refresh_layout)
     SwipeRefreshLayout refreshLayout;
-
     @BindView(R.id.details_toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.details_collapsing_toolbar)
     SubtitleCollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.details_date)
     TextView dateTextView;
-
     @BindView(R.id.details_genres)
     FlexboxLayout flexboxLayout;
-
     @BindView(R.id.details_adult)
     FrameLayout adultFrameLayout;
+    private long id;
+    private ContentObserver contentObserver;
 
     @SuppressWarnings("WeakerAccess")
     public DetailsController(@Nullable final Bundle args) {
@@ -316,6 +300,6 @@ public class DetailsController extends Controller {
 
         getRouter().popController(this);
 
-        Toast.makeText(context, "Something went wrong while loading data.", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.error_message, Toast.LENGTH_LONG).show();
     }
 }

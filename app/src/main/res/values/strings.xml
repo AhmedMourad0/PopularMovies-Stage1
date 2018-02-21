@@ -22,4 +22,5 @@
 
     <string name="genres">Genres</string>
     <string name="adult">ADULT</string>
+    <string name="error_message">Something went wrong while loading data.</string>
 </resources>
