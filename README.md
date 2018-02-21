@@ -11,7 +11,7 @@ This's a project for the Android Developer Nanodegree Program
 
 ![Screenshot 2](http://oi68.tinypic.com/106kjn8.jpg)
 
-![Screenshot 3](http://oi66.tinypic.com/osuxj6.jpg)
+![Screenshot 3](http://oi64.tinypic.com/34oc9hg.jpg)
 
 ![Screenshot 4](http://oi63.tinypic.com/fwm07m.jpg)
 
