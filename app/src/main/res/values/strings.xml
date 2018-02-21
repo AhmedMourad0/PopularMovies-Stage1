@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="popular_movies">Most Popular</string>
+    <string name="top_rated_movies">Top Rated</string>
+
+    <string name="content_authority">inc.ahmedmourad.popularmovies</string>
+
+    <string name="default_poster_content_description">Movie\'s poster image</string>
+    <string name="backdrop_image_content_description">Movie\'s Backdrop image</string>
+    <string name="plot_synopsis">Plot Synopsis</string>
+
+    <plurals name="runtime_hours">
+        <item quantity="one">%1$d hour</item>
+        <item quantity="other">%1$d hours</item>
+    </plurals>
+    <plurals name="runtime_minutes">
+        <item quantity="one">%1$d minute</item>
+        <item quantity="other">%1$d minutes</item>
+    </plurals>
+
+    <string name="rating">%1$s / 5.0</string>
+
+    <string name="genres">Genres</string>
+    <string name="adult">ADULT</string>
+</resources>
