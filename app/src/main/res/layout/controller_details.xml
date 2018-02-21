@@ -20,7 +20,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:fixMenuPadding="true"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <ImageView
                 android:id="@+id/details_backdrop"
@@ -66,17 +66,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
+                        android:layout_marginLeft="24dp"
                         android:layout_marginStart="24dp"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="24dp">
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="wrap_content"
@@ -84,18 +84,18 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:cardElevation="6dp"
                             app:cardBackgroundColor="@color/cardview_dark_background"
-                            app:cardCornerRadius="1dp">
+                            app:cardCornerRadius="1dp"
+                            app:cardElevation="6dp">
 
                             <ImageView
                                 android:id="@+id/details_poster"
                                 android:layout_width="match_parent"
                                 android:layout_height="200dp"
                                 android:adjustViewBounds="true"
-                                android:src="@drawable/placeholder"
                                 android:contentDescription="@string/default_poster_content_description"
-                                android:scaleType="centerCrop" />
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/placeholder" />
 
                         </android.support.v7.widget.CardView>
 
@@ -103,18 +103,18 @@
                             android:id="@+id/details_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="sans-serif"
                             android:gravity="end"
                             android:textSize="14sp"
-                            android:layout_marginTop="8dp"
                             tools:text="Feb 2017" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
@@ -122,9 +122,9 @@
                             android:id="@+id/details_adult"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
                             android:background="@drawable/border"
-                            android:visibility="gone"
-                            android:layout_marginBottom="24dp">
+                            android:visibility="gone">
 
 
                             <TextView
@@ -133,13 +133,13 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:gravity="center_horizontal"
-                                android:paddingTop="8dp"
                                 android:paddingBottom="8dp"
-                                android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:text="@string/adult"
                                 android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:text="@string/adult" />
+                                android:textStyle="bold" />
 
                         </FrameLayout>
 
@@ -147,36 +147,36 @@
                             android:id="@+id/details_runtime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
                             android:fontFamily="sans-serif"
                             android:textSize="18sp"
                             android:textStyle="italic"
-                            android:layout_marginBottom="16dp"
                             tools:text="2 hours 3 minutes" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center_horizontal">
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
                             <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/details_rating_bar"
                                 style="@style/Widget.MaterialRatingBar.RatingBar"
                                 android:layout_width="120dp"
                                 android:layout_height="24dp"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:stepSize="0.1"
-                                android:isIndicator="true"
                                 app:mrb_fillBackgroundStars="true" />
 
                             <TextView
                                 android:id="@+id/details_rating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
                                 android:fontFamily="sans-serif"
                                 android:textSize="14sp"
                                 android:textStyle="italic"
-                                android:layout_marginTop="4dp"
                                 tools:text="2.4 / 5.0" />
 
                         </LinearLayout>
@@ -225,11 +225,11 @@
                     android:id="@+id/details_genres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:flexWrap="wrap"
+                    app:alignContent="stretch"
                     app:alignItems="stretch"
                     app:flexDirection="row"
-                    app:showDivider="end"
-                    app:alignContent="stretch" />
+                    app:flexWrap="wrap"
+                    app:showDivider="end" />
 
             </LinearLayout>
 

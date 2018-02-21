@@ -45,6 +45,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return moviesList.size();
     }
 
+    @FunctionalInterface
+    public interface OnClickListener {
+        void onClick(final SimpleMoviesEntity movie);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.poster)
@@ -53,17 +58,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @BindView(R.id.title)
         TextView title;
 
-        @BindView(R.id.overview)
-        TextView overview;
-
         @BindView(R.id.rating)
         MaterialRatingBar rating;
-
-        @BindView(R.id.adult)
-        TextView adult;
-
-        @BindView(R.id.year)
-        TextView year;
 
         ViewHolder(final View view) {
             super(view);
@@ -90,20 +86,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
             title.setText(movie.originalTitle);
             rating.setRating((float) movie.votesAverage);
-
-            year.setText(movie.releaseDate.substring(0, 4));
-
-            overview.setText(movie.overview);
-
-            if (movie.isAdult)
-                adult.setVisibility(View.VISIBLE);
-            else
-                adult.setVisibility(View.INVISIBLE);
         }
-    }
-
-    @FunctionalInterface
-    public interface OnClickListener {
-        void onClick(final SimpleMoviesEntity movie);
     }
 }
