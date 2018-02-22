@@ -3,6 +3,7 @@ package inc.ahmedmourad.popularmovies.model.entities;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -88,12 +89,7 @@ public class MoviesEntity {
     @NonNull
     private String listToString(final List<MoviesGenre> moviesGenres) {
 
-        final StringBuilder result = new StringBuilder();
-
-        for (final MoviesGenre genre : moviesGenres)
-            result.append(genre.name).append("||||");
-
-        return result.delete(result.length() - 4, result.length()).toString();
+        return TextUtils.join("||||", moviesGenres);
     }
 
     @NonNull
