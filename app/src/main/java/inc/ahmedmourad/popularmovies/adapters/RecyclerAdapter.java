@@ -103,7 +103,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             title.setText(movie.originalTitle);
             rating.setRating((float) movie.votesAverage);
 
-            if (itemId == R.layout.item_movie_detailed) {
+            if (itemId == R.layout.item_movie_linear) {
 
                 if (year != null)
                     year.setText(movie.releaseDate.substring(0, 4));

@@ -114,9 +114,9 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
         final boolean shouldUsePoster = item == PreferencesUtils.ITEM_GRID;
 
         if (shouldUsePoster)
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_poster);
+            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
         else
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_detailed);
+            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
 
         initializeRecyclerView(recyclerAdapter, shouldUsePoster);
 
@@ -272,7 +272,7 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
         if (prefs.getInt(PreferencesUtils.KEY_ITEM, PreferencesUtils.ITEM_GRID) == PreferencesUtils.ITEM_GRID) {
 
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_detailed);
+            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
             recyclerView.setAdapter(recyclerAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
@@ -282,7 +282,7 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
         } else {
 
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_poster);
+            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
             recyclerView.setAdapter(recyclerAdapter);
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
 
@@ -343,13 +343,13 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
                 if (item == PreferencesUtils.ITEM_GRID) {
 
-                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_poster);
+                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
                     recyclerView.setAdapter(recyclerAdapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
 
                 } else {
 
-                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_detailed);
+                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
                     recyclerView.setAdapter(recyclerAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                 }
