@@ -1,6 +1,7 @@
 package inc.ahmedmourad.popularmovies.view.controllers;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -31,6 +32,9 @@ public class MainController extends Controller {
 
     @BindView(R.id.tabs_layout)
     SmartTabLayout tabsLayout;
+
+    @BindView(R.id.appbar)
+    AppBarLayout appBarLayout;
 
     @NonNull
     @Override
@@ -82,6 +86,14 @@ public class MainController extends Controller {
         });
 
         tabsLayout.setViewPager(viewPager);
+    }
+
+    void addOnOffsetChangedListener(final AppBarLayout.OnOffsetChangedListener listener) {
+        appBarLayout.addOnOffsetChangedListener(listener);
+    }
+
+    void removeOnOffsetChangedListener(final AppBarLayout.OnOffsetChangedListener listener) {
+        appBarLayout.removeOnOffsetChangedListener(listener);
     }
 }
 

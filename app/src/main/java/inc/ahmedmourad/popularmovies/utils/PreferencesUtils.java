@@ -25,6 +25,14 @@ public final class PreferencesUtils {
 //    public static final int TAB_TOP_RATED = 1;
 
     /**
+     * The user's favourite item
+     */
+    public static final String KEY_ITEM = "i";
+
+    public static final int ITEM_GRID = 0;
+    public static final int ITEM_LINEAR = 1;
+
+    /**
      * default shared preferences object
      * @param context i ran out of jokes
      * @return default shared preferences object
