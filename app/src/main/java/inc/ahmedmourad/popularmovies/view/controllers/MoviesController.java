@@ -111,14 +111,7 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
         setHasOptionsMenu(true);
 
-        final boolean shouldUsePoster = item == PreferencesUtils.ITEM_GRID;
-
-        if (shouldUsePoster)
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
-        else
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
-
-        initializeRecyclerView(recyclerAdapter, shouldUsePoster);
+        initializeRecyclerView();
 
         final Uri uri;
 
@@ -209,21 +202,18 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
     /**
      * initialize our recyclerView
-     *
-     * @param recyclerAdapter recyclerAdapter
-     * @param shouldUsePoster if the user prefers the poster layout
      */
-    private void initializeRecyclerView(final RecyclerAdapter recyclerAdapter, final boolean shouldUsePoster) {
+    private void initializeRecyclerView() {
 
-        if (shouldUsePoster)
-            recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
+        if (item == PreferencesUtils.ITEM_GRID)
+            useGridLayoutManager();
+
         else
-            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+            useLinearLayoutManager();
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setVerticalScrollBarEnabled(true);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(recyclerAdapter);
     }
 
     @Override
@@ -245,11 +235,13 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
             super.onPrepareOptionsMenu(menu);
 
-            if (parentController != null)
+            if (parentController != null) {
+
                 if (prefs.getInt(PreferencesUtils.KEY_ITEM, PreferencesUtils.ITEM_GRID) == PreferencesUtils.ITEM_GRID)
                     menu.getItem(0).setIcon(R.drawable.list_linear);
                 else
                     menu.getItem(0).setIcon(R.drawable.list_grid);
+            }
         }
     }
 
@@ -258,9 +250,11 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
         if (mode == prefs.getInt(PreferencesUtils.KEY_SELECTED_TAB, PreferencesUtils.TAB_POPULAR)) {
 
-            if (parentController != null)
+            if (parentController != null) {
+
                 if (item.getItemId() == R.id.item_layout)
                     swapLayout(item);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -272,26 +266,36 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
         if (prefs.getInt(PreferencesUtils.KEY_ITEM, PreferencesUtils.ITEM_GRID) == PreferencesUtils.ITEM_GRID) {
 
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
-            recyclerView.setAdapter(recyclerAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-
-            item.setIcon(R.drawable.list_grid);
+            useLinearLayoutManager();
 
             PreferencesUtils.edit(context, e -> e.putInt(PreferencesUtils.KEY_ITEM, PreferencesUtils.ITEM_LINEAR));
 
+            item.setIcon(R.drawable.list_grid);
+
         } else {
 
-            recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
-            recyclerView.setAdapter(recyclerAdapter);
-            recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
-
-            item.setIcon(R.drawable.list_linear);
+            useGridLayoutManager();
 
             PreferencesUtils.edit(context, e -> e.putInt(PreferencesUtils.KEY_ITEM, PreferencesUtils.ITEM_GRID));
+
+            item.setIcon(R.drawable.list_linear);
         }
 
         recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+    }
+
+    private void useLinearLayoutManager() {
+
+        recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+    }
+
+    private void useGridLayoutManager() {
+
+        recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -341,22 +345,13 @@ public class MoviesController extends Controller implements RecyclerAdapter.OnCl
 
                 final Parcelable recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
 
-                if (item == PreferencesUtils.ITEM_GRID) {
-
-                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_grid);
-                    recyclerView.setAdapter(recyclerAdapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
-
-                } else {
-
-                    recyclerAdapter = new RecyclerAdapter(moviesList, this, R.layout.item_movie_linear);
-                    recyclerView.setAdapter(recyclerAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                }
+                if (item == PreferencesUtils.ITEM_GRID)
+                    useGridLayoutManager();
+                else
+                    useLinearLayoutManager();
 
                 recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
             }
-
         }
     }
 }
