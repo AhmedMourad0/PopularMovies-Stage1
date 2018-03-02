@@ -1,7 +1,7 @@
 # Popular Movies Project (Stage 1)
 
 ## Project Overview
-This's a project for the Android Developer Nanodegree Program
+This's a project for the Android Developer Nanodegree Program.
 
 ## Screenshots
 
